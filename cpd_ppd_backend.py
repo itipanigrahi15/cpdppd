@@ -42,3 +42,33 @@ def add_entry():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+from flask import Flask, jsonify
+import json
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'CPD/PPD API is running!'
+
+@app.route('/entries', methods=['GET'])
+def get_entries():
+    try:
+        with open('entries.json') as f:
+            data = json.load(f)
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/data', methods=['GET'])
+def get_data():
+    try:
+        with open('data.json') as f:
+            data = json.load(f)
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
