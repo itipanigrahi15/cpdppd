@@ -5,6 +5,12 @@ import json
 import os
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'CPD/PPD API is running!'
+
+
 CORS(app)
 
 DATA_FILE = "data.json"
